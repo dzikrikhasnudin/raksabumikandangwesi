@@ -18,7 +18,7 @@ class Post extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'title', 'slug', 'description', 'content', 'category', 'status'
+        'title', 'slug', 'description', 'thumbnail', 'content', 'category', 'status'
     ];
 
     public function getRouteKeyName()

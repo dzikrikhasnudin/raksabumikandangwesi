@@ -36,6 +36,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
+
     Route::get('postingan', IndexPosts::class)->name('post.index');
     Route::get('tambah-postingan', [PostController::class, 'create'])->name('post.create');
+    route::post('postingan', [PostController::class, 'store'])->name('post.store');
 });
