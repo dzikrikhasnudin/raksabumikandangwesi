@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Http\Livewire\IndexPosts;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +35,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('postingan', IndexPosts::class)->name('post.index');
+    Route::get('tambah-postingan', [PostController::class, 'create'])->name('post.create');
 });
