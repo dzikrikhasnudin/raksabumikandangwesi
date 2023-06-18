@@ -26,6 +26,26 @@ class Post extends Model
         return 'slug';
     }
 
+    public function scopeBerita(Builder $query)
+    {
+        $query->where('category', '=', 'berita');
+    }
+
+    public function scopeArtikel(Builder $query)
+    {
+        $query->where('category', '=', 'artikel');
+    }
+
+    public function scopeCeramah(Builder $query)
+    {
+        $query->where('category', '=', 'ceramah');
+    }
+
+    public function scopeTokoh(Builder $query)
+    {
+        $query->where('category', '=', 'tokoh')->latest();
+    }
+
     public function scopePublished(Builder $query): void
     {
         $query->where('status', '=', 'published');

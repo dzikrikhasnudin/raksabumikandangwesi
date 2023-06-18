@@ -16,17 +16,15 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('description');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->longText('content');
             $table->enum('category', ['artikel', 'tokoh', 'berita', 'ceramah']);
-            $table->enum('status', ['published', 'draft']);
+            $table->enum('status', ['published', 'draft'])->default('draft');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('posts');

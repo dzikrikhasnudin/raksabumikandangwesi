@@ -23,14 +23,16 @@
                     </div>
                     <input type="search" id="default-search"
                         class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-amber-300 focus:border-amber-300 "
-                        placeholder="Cari Berita, Gagasan...">
+                        placeholder="Cari Berita, Artikel...">
                 </div>
                 @forelse ($posts as $post)
                 <article x-data="{ open: false }"
                     class="cursor-pointer mb-4 relative overflow-visible md:overflow-hidden border border-stone-200 p-2 grid grid-cols-6 items-start rounded-md gap-2 hover:shadow-md transition-all duration-300">
                     <div class="p-2 text-md col-span-5 text-stone-800">
-                        <a href="#">
-                            <h2 class="line-clamp-2 font-semibold">{{ ucwords($post->title) }}</h2>
+                        <a href="{{ route('post.edit', $post) }}">
+                            <h2 class="line-clamp-2 font-semibold"><span class="italic">{{ $post->status == 'draft' ?
+                                    'Draft - ' : '' }}</span>{{
+                                ucwords($post->title) }}</h2>
                             <p class="hidden lg:line-clamp-2 text-sm text-stone-600">{{ $post->description }}</p>
                         </a>
                         <div class="pt-2 flex gap-2 items-center flex-wrap">
@@ -67,7 +69,7 @@
                             </span>
                         </a>
                         {{-- Edit --}}
-                        <a href="#"
+                        <a href="{{ route('post.edit', $post) }}"
                             class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                             <span class="mx-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -81,7 +83,8 @@
                             </span>
                         </a>
                         {{-- Hapus --}}
-                        <form action="#" method="POST" role="alert" alert-text="Yakin hapus postingan ini?">
+                        <form action="{{ route('post.destroy', $post) }}" method="POST" role="alert"
+                            alert-text="Yakin Hapus Data?">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
@@ -126,7 +129,7 @@
                             </span>
                             <p>Edit</p>
                         </a>
-                        <form action="#" method="POST" role="alert" alert-text="Yakin hapus halaman ini?">
+                        <form action="#" method="POST" role="alert" alert-text="Yakin Hapus Data?">
                             @csrf
                             @method('delete')
                             <button type="submit" class="py-2 flex text-stone-600 items-center active:bg-amber-200">
@@ -151,4 +154,30 @@
 
         </div>
     </div>
+
+    @push('script')
+    <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            // event delete category
+            $("form[role='alert']").submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "Hapus Postingan",
+                    text: $(this).attr('alert-text'),
+                    icon: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonText: "Batal",
+                    reverseButtons: true,
+                    confirmButtonText: "Hapus",
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.submit();
+                    }
+                });
+            })
+        })
+    </script>
+    @endpush
 </div>

@@ -41,6 +41,9 @@ Route::middleware([
     });
 
     Route::get('postingan', IndexPosts::class)->name('post.index');
-    Route::get('tambah-postingan', [PostController::class, 'create'])->name('post.create');
-    route::post('postingan', [PostController::class, 'store'])->name('post.store');
+    Route::get('postingan/tambah', [PostController::class, 'create'])->name('post.create');
+    Route::post('postingan', [PostController::class, 'store'])->name('post.store');
+    Route::get('postingan/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('postingan/{post}', [PostController::class, 'update'])->name('post.update');
+    Route::delete('postingan/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 });
