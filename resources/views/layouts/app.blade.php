@@ -31,7 +31,7 @@
 <body class="font-sans antialiased">
     <x-banner />
 
-    <div class="bg-gray-50">
+    <div class="bg-gray-100">
         @livewire('navigation-menu')
 
         {{ $sidebar ?? '' }}
