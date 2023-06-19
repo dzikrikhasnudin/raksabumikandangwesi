@@ -26,24 +26,13 @@ class Post extends Model
         return 'slug';
     }
 
-    public function scopeBerita(Builder $query)
+    public function scopeSearch($query, $keyword)
     {
-        $query->where('category', '=', 'berita');
-    }
-
-    public function scopeArtikel(Builder $query)
-    {
-        $query->where('category', '=', 'artikel');
-    }
-
-    public function scopeCeramah(Builder $query)
-    {
-        $query->where('category', '=', 'ceramah');
-    }
-
-    public function scopeTokoh(Builder $query)
-    {
-        $query->where('category', '=', 'tokoh')->latest();
+        $query->when($keyword ?? false, function ($query, $cari) {
+            return $query->where('title', 'like', '%' . $cari . '%')
+                ->orWhere('content', 'like', '%' . $cari . '%')
+                ->orWhere('category', 'like', '%' . $cari . '%');
+        });
     }
 
     public function scopePublished(Builder $query): void

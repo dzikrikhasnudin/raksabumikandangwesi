@@ -21,7 +21,7 @@
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
-                    <input type="search" id="default-search"
+                    <input wire:model="query" type="search" id="default-search"
                         class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-amber-300 focus:border-amber-300 "
                         placeholder="Cari Berita, Artikel...">
                 </div>
@@ -36,7 +36,7 @@
                             <p class="hidden lg:line-clamp-2 text-sm text-stone-600">{{ $post->description }}</p>
                         </a>
                         <div class="pt-2 flex gap-2 items-center flex-wrap">
-                            <a href="#">
+                            <a href="{{ route('post.index', ['kategori' => $post->category]) }}">
                                 <small
                                     class="border border-stone-400 text-stone-600 rounded-lg px-2 py-1 hover:bg-yellow-500 hover:border-yellow-600 hover:text-white transition-all duration-300">{{
                                     ucwords($post->category) }}</small>
@@ -56,7 +56,8 @@
 
                     <div class="hidden md:flex m-auto  text-stone-600 ">
                         {{-- Lihat --}}
-                        <a href="#" target="_blank"
+                        <a href="{{ route('detail.post', ['slug' => $post->slug, 'category' => $post->category]) }}"
+                            target="_blank"
                             class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                             <span class="mx-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -171,6 +172,7 @@
                     cancelButtonText: "Batal",
                     reverseButtons: true,
                     confirmButtonText: "Hapus",
+                    confirmButtonColor: '#C27803',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         event.target.submit();

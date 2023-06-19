@@ -46,4 +46,5 @@ Route::middleware([
     Route::get('postingan/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
     Route::put('postingan/{post}', [PostController::class, 'update'])->name('post.update');
     Route::delete('postingan/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+    Route::get('{category}/{slug}', [PostController::class, 'show'])->name('detail.post');
 });

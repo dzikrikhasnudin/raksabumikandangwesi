@@ -15,9 +15,6 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -42,19 +39,6 @@ class PostController extends Controller
         return view('posts.edit', compact('post'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Post $post, Request $request)
     {
         $data = $request->validate([
@@ -74,14 +58,18 @@ class PostController extends Controller
         return redirect()->route('post.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
         $post->delete();
         Alert::toast('Postingan berhasil dihapus', 'success');
 
         return back();
+    }
+
+    public function show($category, $slug)
+    {
+        $post = Post::where('slug', '=', $slug)->get();
+
+        dd($post);
     }
 }
