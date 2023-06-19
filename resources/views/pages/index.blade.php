@@ -1,14 +1,14 @@
 <div class="md:ml-64">
-    <x-slot name="title">Semua Postingan</x-slot>
+    <x-slot name="title">Semua Halaman</x-slot>
     <x-slot name="sidebar">
         @include('layouts.sidebar')
     </x-slot>
 
     <div class="mt-16">
         <div class="flex justify-between items-center bg-white px-4 py-6 rounded-lg border border-gray-100  h-12 mb-4">
-            <h2 class="text-xl font-semibold">Semua Postingan</h2>
-            <a href="{{ route('post.create') }}">
-                <x-button class="bg-yellow-500 hover:bg-yellow-600 text-white">Buat Postingan</x-button>
+            <h2 class="text-xl font-semibold">Semua Halaman</h2>
+            <a href="{{ route('page.create') }}">
+                <x-button class="bg-yellow-500 hover:bg-yellow-600 text-white">Tambah Halaman</x-button>
             </a>
         </div>
         <div class="p-4 bg-white border-b sm:rounded-lg border-gray-100 mb-4">
@@ -23,25 +23,20 @@
                     </div>
                     <input wire:model="query" type="search" id="default-search"
                         class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-amber-300 focus:border-amber-300 "
-                        placeholder="Cari Berita, Artikel...">
+                        placeholder="Cari Halaman...">
                 </div>
-                @forelse ($posts as $post)
+                @forelse ($pages as $page)
                 <article x-data="{ open: false }"
                     class="cursor-pointer mb-4 relative overflow-visible md:overflow-hidden border border-stone-200 p-2 grid grid-cols-6 items-start rounded-md gap-2 hover:shadow-md transition-all duration-300">
                     <div class="p-2 text-md col-span-5 text-stone-800">
-                        <a href="{{ route('post.edit', $post) }}">
-                            <h2 class="line-clamp-2 font-semibold"><span class="italic">{{ $post->status == 'draft' ?
+                        <a href="{{ route('page.edit', $page) }}">
+                            <h2 class="line-clamp-2 font-semibold"><span class="italic">{{ $page->status == 'draft' ?
                                     'Draft - ' : '' }}</span>{{
-                                ucwords($post->title) }}</h2>
-                            <p class="hidden lg:line-clamp-2 text-sm text-stone-600">{{ $post->description }}</p>
+                                ucwords($page->title) }}</h2>
+                            <p class="hidden lg:line-clamp-2 text-sm text-stone-600">{{ $page->description }}</p>
                         </a>
                         <div class="pt-2 flex gap-2 items-center flex-wrap">
-                            <a href="{{ route('post.index', ['kategori' => $post->category]) }}">
-                                <small
-                                    class="border border-stone-400 text-stone-600 rounded-lg px-2 py-1 hover:bg-yellow-500 hover:border-yellow-600 hover:text-white transition-all duration-300">{{
-                                    ucwords($post->category) }}</small>
-                            </a>
-                            <small class="text-stone-600 ">Dipublikasikan {{ $post->created_at->diffForHumans() }}
+                            <small class="text-stone-600 ">Dipublikasikan {{ $page->created_at->diffForHumans() }}
                             </small>
                         </div>
                     </div>
@@ -56,8 +51,7 @@
 
                     <div class="hidden md:flex m-auto  text-stone-600 ">
                         {{-- Lihat --}}
-                        <a href="{{ route('detail.post', ['slug' => $post->slug, 'category' => $post->category]) }}"
-                            target="_blank"
+                        <a href="#" target="_blank"
                             class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                             <span class="mx-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -70,7 +64,7 @@
                             </span>
                         </a>
                         {{-- Edit --}}
-                        <a href="{{ route('post.edit', $post) }}"
+                        <a href="{{ route('page.edit', $page) }}"
                             class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                             <span class="mx-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -84,8 +78,8 @@
                             </span>
                         </a>
                         {{-- Hapus --}}
-                        <form action="{{ route('post.destroy', $post) }}" method="POST" role="alert"
-                            alert-text="Yakin Hapus Data?">
+                        <form action="{{ route('page.destroy', $page) }}" method="POST" role="alert"
+                            alert-text="Yakin Hapus Halaman?">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
@@ -105,8 +99,7 @@
                     {{-- Responsive --}}
                     <nav x-show="open" x-transition.duration.300ms @click.outside="open = false"
                         class="action border border-stone-200 absolute bg-white row-start-2 col-start-4 cols-span-5 w-full  rounded drop-shadow-lg shadow-stone-800 py-2 -mt-8 z-50">
-                        <a href="{{ route('detail.post', ['slug' => $post->slug, 'category' => $post->category]) }}"
-                            target="_blank" class="py-2 flex text-stone-600 items-center active:bg-amber-200">
+                        <a href="#" target="_blank" class="py-2 flex text-stone-600 items-center active:bg-amber-200">
                             <span class="mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -118,7 +111,7 @@
                             </span>
                             <p>Lihat</p>
                         </a>
-                        <a href="{{ route('post.edit', $post) }}"
+                        <a href="{{ route('page.edit', $page) }}"
                             class="py-2 flex text-stone-600 items-center active:bg-amber-200">
                             <span class="mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -132,8 +125,8 @@
                             </span>
                             <p>Edit</p>
                         </a>
-                        <form action="{{ route('post.destroy', $post) }}" method="POST" role="alert"
-                            alert-text="Yakin Hapus Data?">
+                        <form action="{{ route('page.destroy', $page) }}" method="POST" role="alert"
+                            alert-text="Yakin Hapus Halaman?" class="w-full inline-block">
                             @csrf
                             @method('delete')
                             <button type="submit" class="py-2 flex text-stone-600 items-center active:bg-amber-200">
@@ -154,7 +147,7 @@
                 <p class="text-center py-5">Belum ada postingan</p>
                 @endforelse
 
-                {{ $posts->links() }}
+                {{ $pages->links() }}
 
             </div>
 
@@ -162,14 +155,15 @@
     </div>
 
     @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-            // event delete category
+            // event delete
             $("form[role='alert']").submit(function(event) {
                 event.preventDefault();
                 Swal.fire({
-                    title: "Hapus Postingan",
+                    title: "Hapus Halaman",
                     text: $(this).attr('alert-text'),
                     icon: 'warning',
                     allowOutsideClick: false,

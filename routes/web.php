@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
+use App\Http\Livewire\IndexPages;
 use App\Http\Livewire\IndexPosts;
 use Illuminate\Support\Facades\Route;
 
@@ -40,11 +42,30 @@ Route::middleware([
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
 
-    Route::get('postingan', IndexPosts::class)->name('post.index');
-    Route::get('postingan/tambah', [PostController::class, 'create'])->name('post.create');
-    Route::post('postingan', [PostController::class, 'store'])->name('post.store');
-    Route::get('postingan/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
-    Route::put('postingan/{post}', [PostController::class, 'update'])->name('post.update');
-    Route::delete('postingan/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+
+    // Route Postingan
+    Route::prefix('postingan')->name('post.')->group(function () {
+        Route::get('/', IndexPosts::class)->name('index');
+        Route::controller(PostController::class)->group(function () {
+            Route::get('/tambah', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/edit/{post}', 'edit')->name('edit');
+            Route::put('/{post}', 'update')->name('update');
+            Route::delete('/{post}', 'destroy')->name('destroy');
+        });
+    });
+
+    // Route Halaman
+    Route::prefix('halaman')->name('page.')->group(function () {
+        Route::get('/', IndexPages::class)->name('index');
+        Route::controller(PageController::class)->group(function () {
+            Route::get('/tambah', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/edit/{page}', 'edit')->name('edit');
+            Route::put('/{page}', 'update')->name('update');
+            Route::delete('/{page}', 'destroy')->name('destroy');
+        });
+    });
+
     Route::get('{category}/{slug}', [PostController::class, 'show'])->name('detail.post');
 });

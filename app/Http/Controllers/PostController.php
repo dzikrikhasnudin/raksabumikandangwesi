@@ -18,7 +18,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|unique:posts,title',
             'description' => 'required|string',
             'category' => 'required',
             'content' => 'required',
@@ -69,7 +69,6 @@ class PostController extends Controller
     public function show($category, $slug)
     {
         $post = Post::where('slug', '=', $slug)->get();
-
         dd($post);
     }
 }
