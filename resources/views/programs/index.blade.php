@@ -1,14 +1,14 @@
 <div class="md:ml-64">
-    <x-slot name="title">Semua Halaman</x-slot>
+    <x-slot name="title">Semua Program</x-slot>
     <x-slot name="sidebar">
         @include('layouts.sidebar')
     </x-slot>
 
     <div class="mt-16">
         <div class="flex justify-between items-center bg-white px-4 py-6 rounded-lg border border-gray-100  h-12 mb-4">
-            <h2 class="text-xl font-semibold">Semua Halaman</h2>
-            <a href="{{ route('page.create') }}">
-                <x-button class="bg-yellow-500 hover:bg-yellow-600 text-white">Tambah Halaman</x-button>
+            <h2 class="text-xl font-semibold">Semua Program</h2>
+            <a href="{{ route('program.create') }}">
+                <x-button class="bg-yellow-500 hover:bg-yellow-600 text-white">Tambah Program</x-button>
             </a>
         </div>
         <div class="p-4 bg-white border-b sm:rounded-lg border-gray-100 mb-4">
@@ -23,20 +23,20 @@
                     </div>
                     <input wire:model="query" type="search" id="default-search"
                         class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-amber-300 focus:border-amber-300 "
-                        placeholder="Cari Halaman...">
+                        placeholder="Cari Program...">
                 </div>
-                @forelse ($pages as $page)
+                @forelse ($programs as $program)
                 <article x-data="{ open: false }"
                     class="cursor-pointer mb-4 relative overflow-visible md:overflow-hidden border border-stone-200 p-2 grid grid-cols-6 items-start rounded-md gap-2 hover:shadow-md transition-all duration-300">
                     <div class="p-2 text-md col-span-5 text-stone-800">
-                        <a href="{{ route('page.edit', $page) }}">
-                            <h2 class="line-clamp-2 font-semibold"><span class="italic">{{ $page->status == 'draft' ?
+                        <a href="{{ route('program.edit', $program) }}">
+                            <h2 class="line-clamp-2 font-semibold"><span class="italic">{{ $program->status == 'draft' ?
                                     'Draft - ' : '' }}</span>{{
-                                ucwords($page->title) }}</h2>
-                            <p class="hidden lg:line-clamp-2 text-sm text-stone-600">{{ $page->description }}</p>
+                                ucwords($program->title) }}</h2>
+                            <p class="hidden lg:line-clamp-2 text-sm text-stone-600">{{ $program->description }}</p>
                         </a>
                         <div class="pt-2 flex gap-2 items-center flex-wrap">
-                            <small class="text-stone-600 ">Dipublikasikan {{ $page->created_at->diffForHumans() }}
+                            <small class="text-stone-600 ">Dipublikasikan {{ $program->created_at->diffForHumans() }}
                             </small>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             </span>
                         </a>
                         {{-- Edit --}}
-                        <a href="{{ route('page.edit', $page) }}"
+                        <a href="{{ route('program.edit', $program) }}"
                             class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                             <span class="mx-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -78,7 +78,7 @@
                             </span>
                         </a>
                         {{-- Hapus --}}
-                        <form action="{{ route('page.destroy', $page) }}" method="POST" role="alert"
+                        <form action="{{ route('program.destroy', $program) }}" method="POST" role="alert"
                             alert-text="Yakin Hapus Halaman?">
                             @csrf
                             @method('DELETE')
@@ -111,7 +111,7 @@
                             </span>
                             <p>Lihat</p>
                         </a>
-                        <a href="{{ route('page.edit', $page) }}"
+                        <a href="{{ route('program.edit', $program) }}"
                             class="py-2 flex text-stone-600 items-center active:bg-amber-200">
                             <span class="mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -125,7 +125,7 @@
                             </span>
                             <p>Edit</p>
                         </a>
-                        <form action="{{ route('page.destroy', $page) }}" method="POST" role="alert"
+                        <form action="{{ route('program.destroy', $program) }}" method="POST" role="alert"
                             alert-text="Yakin Hapus Halaman?" class="w-full inline-block">
                             @csrf
                             @method('delete')
@@ -147,7 +147,7 @@
                 <p class="text-center py-5">Belum ada postingan</p>
                 @endforelse
 
-                {{ $pages->links() }}
+                {{ $programs->links() }}
 
             </div>
 

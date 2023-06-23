@@ -51,7 +51,6 @@
                     <aside class="py-4 lg:p-4">
                         <div class=" max-w-xl mx-auto border border-gray-200 rounded mb-4" x-data="{ selected: 0 }">
                             <ul class="shadow-box">
-
                                 <li class="relative border-b border-gray-200">
                                     <button type="button" class="w-full px-6 py-4 text-left"
                                         @click="selected !== 1 ? selected = 1 : selected = null">
@@ -88,7 +87,6 @@
                                             <img id="preview"
                                                 src="{{ asset('storage/photos/upload/no-image.png') ?? old('thumbnail') }}"
                                                 class="object-cover mx-auto px-10 rounded-lg py-3 aspect-video transition duration-300 ease-in-out">
-
                                         </div>
                                     </div>
                                 </li>
@@ -130,17 +128,16 @@
                                                 </div>
                                                 <div class="flex items-center mb-2">
                                                     <input id="category-3" type="radio" value="ceramah" name="category"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:ring-offset-gray-800 focus:ring-2 ">
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                     <label for="category-3"
                                                         class="ml-2 text-sm font-medium text-gray-900 ">Ceramah</label>
                                                 </div>
                                                 <div class="flex items-center mb-2">
                                                     <input id="category-4" type="radio" value="tokoh" name="category"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:ring-offset-gray-800 focus:ring-2 ">
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                     <label for="category-4"
                                                         class="ml-2 text-sm font-medium text-gray-900 ">Tokoh</label>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -166,8 +163,6 @@
                                         x-bind:style="selected == 3 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''">
                                         <div class="py-3 px-6">
                                             <div class="w-full">
-
-
                                                 <label for="countries"
                                                     class="block mb-2 sr-only text-sm font-medium text-gray-900 dark:text-white">Status</label>
                                                 <select id="countries" name="status"
@@ -175,12 +170,10 @@
                                                     <option value="draft" selected>Draft</option>
                                                     <option value="published">Publikasikan</option>
                                                 </select>
-
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-
                         </div>
 
                         <div class="grid grid-cols-2 gap-2 items-center">

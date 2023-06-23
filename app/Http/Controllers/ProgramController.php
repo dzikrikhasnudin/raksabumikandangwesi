@@ -9,9 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ProgramController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
@@ -24,6 +22,7 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'title' => 'required|string|unique:programs,title',
             'description' => 'required|string',
@@ -31,12 +30,14 @@ class ProgramController extends Controller
         ]);
 
         $data['slug'] = Str::slug($request->title);
+        $data['thumbnail'] = parse_url($request->thumbnail)['path'];
         $data['status'] = $request->status;
+
 
         Program::create($data);
         Alert::toast('Program berhasil ditambahkan', 'success');
 
-        return redirect()->route('page.index');
+        return redirect()->route('program.index');
     }
 
     public function show(string $id)
@@ -46,7 +47,7 @@ class ProgramController extends Controller
 
     public function edit(Program $program)
     {
-        return view('programs.edit', compact('page'));
+        return view('programs.edit', compact('program'));
     }
 
     public function update(Request $request, Program $program)
@@ -63,7 +64,7 @@ class ProgramController extends Controller
         $program->update($data);
         Alert::toast('Program berhasil diubah', 'success');
 
-        return redirect()->route('page.index');
+        return redirect()->route('program.index');
     }
 
     public function destroy(Program $program)

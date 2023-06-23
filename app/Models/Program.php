@@ -18,7 +18,7 @@ class Program extends Model
     protected $table = 'programs';
 
     protected $fillable = [
-        'title', 'slug', 'description', 'content',  'status'
+        'title', 'slug', 'description', 'thumbnail', 'content', 'status'
     ];
 
     public function getRouteKeyName()

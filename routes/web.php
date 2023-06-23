@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Livewire\IndexPages;
 use App\Http\Livewire\IndexPosts;
+use App\Http\Livewire\IndexPrograms;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +68,19 @@ Route::middleware([
             Route::delete('/{page}', 'destroy')->name('destroy');
         });
     });
+
+    // Route Program
+    Route::prefix('program')->name('program.')->group(function () {
+        Route::get('/', IndexPrograms::class)->name('index');
+        Route::controller(ProgramController::class)->group(function () {
+            Route::get('/tambah', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/edit/{program}', 'edit')->name('edit');
+            Route::put('/{program}', 'update')->name('update');
+            Route::delete('/{program}', 'destroy')->name('destroy');
+        });
+    });
+
 
     Route::get('{category}/{slug}', [PostController::class, 'show'])->name('detail.post');
 });
