@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Livewire\IndexAlbum;
 use App\Http\Livewire\IndexPages;
 use App\Http\Livewire\IndexPosts;
 use App\Http\Livewire\IndexPrograms;
@@ -78,6 +80,17 @@ Route::middleware([
             Route::get('/edit/{program}', 'edit')->name('edit');
             Route::put('/{program}', 'update')->name('update');
             Route::delete('/{program}', 'destroy')->name('destroy');
+        });
+    });
+
+    Route::prefix('album')->name('album.')->group(function () {
+        Route::get('/', IndexAlbum::class)->name('index');
+        Route::controller(AlbumController::class)->group(function () {
+            Route::get('/{album}', 'show')->name('show');
+            Route::post('/', 'store')->name('store');
+            Route::get('/edit/{album}', 'edit')->name('edit');
+            Route::put('/{album}', 'update')->name('update');
+            Route::delete('/{album}', 'destroy')->name('destroy');
         });
     });
 

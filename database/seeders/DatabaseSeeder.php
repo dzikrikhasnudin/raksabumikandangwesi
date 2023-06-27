@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Post::factory(10)->create();
         \App\Models\Page::factory(10)->create();
         \App\Models\Program::factory(10)->create();
+        \App\Models\Album::factory(10)->create();
 
         \App\Models\User::factory()->create([
             'name' => 'Dzikri Khasnudin',
