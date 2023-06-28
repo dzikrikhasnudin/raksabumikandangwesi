@@ -91,6 +91,8 @@ Route::middleware([
             Route::get('/edit/{album}', 'edit')->name('edit');
             Route::put('/{album}', 'update')->name('update');
             Route::delete('/{album}', 'destroy')->name('destroy');
+            Route::post('/tambah-gambar', 'addImage')->name('add-image');
+            Route::delete('/hapus-gambar/{id}', 'destroyImage')->name('destroy-image');
         });
     });
 

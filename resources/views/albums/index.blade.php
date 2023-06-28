@@ -1,19 +1,19 @@
 <div class="md:ml-64">
-    <x-slot name="title">Semua Album</x-slot>
+    <x-slot name="title">Album</x-slot>
     <x-slot name="sidebar">
         @include('layouts.sidebar')
     </x-slot>
 
     <div class="mt-16">
         <div class="flex justify-between items-center bg-white px-4 py-6 rounded-lg border border-gray-100  h-12 mb-4">
-            <h2 class="text-xl font-semibold">Semua Album</h2>
+            <h2 class="text-xl font-semibold">Album</h2>
             <x-button data-modal-target="tambahAlbum" data-modal-toggle="tambahAlbum"
-                class="bg-primary-500 hover:bg-primary-600 active:bg-primary-900 focus:bg-primary-700 text-white">Tambah
-                Album</x-button>
+                class="bg-primary-500 hover:bg-primary-600 active:bg-primary-900 focus:bg-primary-700 text-white"> <i
+                    class="fa-solid fa-plus mr-2"></i>
+                <span>Tambah</span>
+            </x-button>
         </div>
         <div class="p-4 bg-white border-b sm:rounded-lg border-gray-100 mb-4">
-
-
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -45,8 +45,38 @@
                                 {{ $album->year }}
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('album.show', $album) }}"
-                                    class="font-medium text-primary-600  hover:underline">Lihat</a>
+                                <div class="flex m-auto  text-stone-600 ">
+                                    {{-- Lihat --}}
+                                    <a href="{{ route('album.show', $album) }}"
+                                        class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
+                                        <span class="mx-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                                fill="currentColor">
+                                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    {{-- Hapus --}}
+                                    <form action="{{ route('album.destroy', $album) }}" method="POST" role="alert"
+                                        alert-text="Yakin Hapus Album?">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
+                                            <span class="mx-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </span>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @empty
@@ -69,66 +99,33 @@
 </div>
 
 @push('modals')
+@include('albums.create')
+@endpush
 
-<!-- Main modal -->
-<div id="tambahAlbum" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-    class="fixed delay-300 top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
-        <form action="{{ route('album.store') }}" method="POST">
-            @csrf
-            <div class="relative bg-white rounded-lg shadow">
-                <!-- Modal header -->
-                <div class="flex items-start justify-between p-4 border-b rounded-t ">
-                    <h3 class="text-xl font-semibold text-gray-900 ">
-                        Tambah Album
-                    </h3>
-                    <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center  "
-                        data-modal-hide="tambahAlbum">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    <div class="mb-6">
-                        <label for="album_name" class="block mb-2 text-sm font-medium text-gray-900">Nama
-                            Album</label>
-                        <input type="text" id="album_name" name="name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                            placeholder="Masukkan nama album" required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="year" class="block mb-2 text-sm font-medium text-gray-900 ">Tahun</label>
-
-                        @php
-                        $years = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014',
-                        '2013']
-                        @endphp
-
-                        <select id="year" name="year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option selected>Pilih tahun</option>
-                            @foreach ($years as $year)
-                            <option value="{{ $year }}">{{ $year }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <!-- Modal footer -->
-                <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
-                    <button type="submit"
-                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Tambah</button>
-                    <button data-modal-hide="tambahAlbum" type="button"
-                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Batal</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
+@push('script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        // event delete
+        $("form[role='alert']").submit(function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: "Hapus Album",
+                text: $(this).attr('alert-text'),
+                icon: 'warning',
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonText: "Batal",
+                reverseButtons: true,
+                confirmButtonText: "Hapus",
+                confirmButtonColor: '#C27803',
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+        })
+    })
+</script>
 @endpush

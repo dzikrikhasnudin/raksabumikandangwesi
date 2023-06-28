@@ -6,9 +6,9 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Album>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GalleryImage>
  */
-class AlbumFactory extends Factory
+class GalleryImageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,8 @@ class AlbumFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => Str::ucfirst(fake()->sentence()),
-            'slug' => Str::slug(fake()->name()),
-            'year' => fake()->numberBetween(2013, 2023),
+            'image' => fake()->imageUrl(640, 480, 'events', true),
+            'album_id' => fake()->numberBetween(1, 10),
             "created_at" => now(),
             "updated_at" => now()
         ];

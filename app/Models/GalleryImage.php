@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Album extends Model
+class GalleryImage extends Model
 {
     use HasFactory;
 
@@ -14,19 +14,14 @@ class Album extends Model
         'updated_at' => 'datetime:Y-m-d H:m:s'
     ];
 
-    protected $table = 'albums';
+    protected $table = 'gallery_images';
 
     protected $fillable = [
-        'name', 'slug', 'year'
+        'image', 'album_id'
     ];
 
-    public function getRouteKeyName()
+    public function album()
     {
-        return 'slug';
-    }
-
-    public function images()
-    {
-        return $this->hasMany(GalleryImage::class)->orderBy('id', 'DESC');
+        return $this->belongsTo(Album::class);
     }
 }

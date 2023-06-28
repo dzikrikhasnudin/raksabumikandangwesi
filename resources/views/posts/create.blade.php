@@ -132,6 +132,7 @@
                                                     <label for="category-3"
                                                         class="ml-2 text-sm font-medium text-gray-900 ">Ceramah</label>
                                                 </div>
+
                                                 <div class="flex items-center mb-2">
                                                     <input id="category-4" type="radio" value="tokoh" name="category"
                                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
