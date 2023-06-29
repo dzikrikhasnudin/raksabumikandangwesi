@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\GalleryVideo;
 use Livewire\Component;
+use App\Models\GalleryVideo;
 use Livewire\WithPagination;
+use Illuminate\Database\Eloquent\Builder;
 
 class IndexVideos extends Component
 {
@@ -16,6 +17,11 @@ class IndexVideos extends Component
     public $search;
 
     protected $queryString = ['search'];
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function mount()
     {
@@ -30,7 +36,12 @@ class IndexVideos extends Component
 
     public function render()
     {
-        $videos = GalleryVideo::latest()->get();
+        if ($this->search === null) {
+            $videos = GalleryVideo::latest()->paginate($this->paginate);
+        } else {
+            $videos = GalleryVideo::where('title', 'like', '%' . $this->search . '%')->latest()
+                ->paginate($this->paginate);
+        }
 
         return view('videos.index', compact('videos'));
     }

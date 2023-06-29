@@ -21,6 +21,6 @@ class IndexPages extends Component
 
         return view('pages.index', [
             'pages' => Page::latest()->search($this->query)->paginate(5)
-        ])->layout('layouts.app');
+        ]);
     }
 }

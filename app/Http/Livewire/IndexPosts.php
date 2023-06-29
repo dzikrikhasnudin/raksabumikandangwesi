@@ -31,6 +31,6 @@ class IndexPosts extends Component
 
         return view('posts.index', [
             'posts' => $posts->paginate(5)
-        ])->layout('layouts.app');
+        ]);
     }
 }
