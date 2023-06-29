@@ -8,6 +8,7 @@ use App\Http\Livewire\IndexAlbum;
 use App\Http\Livewire\IndexPages;
 use App\Http\Livewire\IndexPosts;
 use App\Http\Livewire\IndexPrograms;
+use App\Http\Livewire\IndexVideos;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,6 +84,8 @@ Route::middleware([
             Route::delete('/hapus-gambar/{id}', 'destroyImage')->name('destroy-image');
         });
     });
+
+    Route::get('videos', IndexVideos::class)->name('video.index');
 
 
     Route::get('{category}/{slug}', [PostController::class, 'show'])->name('detail.post');
