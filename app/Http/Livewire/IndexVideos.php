@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\GalleryVideo;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Builder;
 
 class IndexVideos extends Component
@@ -36,6 +37,10 @@ class IndexVideos extends Component
 
     public function render()
     {
+        if (!Gate::allows('gallery_show')) {
+            abort(404);
+        }
+
         if ($this->search === null) {
             $videos = GalleryVideo::latest()->paginate($this->paginate);
         } else {

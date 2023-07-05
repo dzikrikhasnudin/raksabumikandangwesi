@@ -10,6 +10,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AlbumController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:gallery_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:gallery_update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:gallery_detail', ['only' => ['show', 'addImage', 'destroyImage']]);
+        $this->middleware('permission:gallery_delete', ['only' => 'destroy']);
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate([

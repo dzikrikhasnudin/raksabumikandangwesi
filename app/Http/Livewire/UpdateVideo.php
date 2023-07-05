@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\GalleryVideo;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateVideo extends Component
 {
@@ -32,6 +33,9 @@ class UpdateVideo extends Component
 
     public function update()
     {
+        if (!Gate::allows('gallery_update')) {
+            abort(404);
+        }
 
         if ($this->videoId) {
             $video = GalleryVideo::find($this->videoId);

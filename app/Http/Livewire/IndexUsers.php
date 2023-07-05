@@ -36,7 +36,6 @@ class IndexUsers extends Component
 
     public function editUser($user_id)
     {
-        // dd($user_id);
         $user = User::find($user_id);
         $user['role'] = $user->getRoleNames()->first();
         $this->emit('getUser', $user);

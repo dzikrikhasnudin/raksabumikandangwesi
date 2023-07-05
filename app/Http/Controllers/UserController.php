@@ -9,6 +9,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:user_create', ['only' => ['store']]);
+    }
 
     public function store(Request $request)
     {

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Program;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
 
 class IndexPrograms extends Component
 {
@@ -26,7 +27,9 @@ class IndexPrograms extends Component
 
     public function render()
     {
-
+        if (!Gate::allows('program_show')) {
+            abort(404);
+        }
         return view('programs.index', [
             'programs' => Program::latest()->search($this->search)->paginate($this->paginate)
         ]);

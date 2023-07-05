@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Program;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProgramController extends Controller
 {
 
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('permission:program_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:program_update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:program_delete', ['only' => 'destroy']);
     }
 
     public function create()
@@ -40,13 +43,9 @@ class ProgramController extends Controller
         return redirect()->route('program.index');
     }
 
-    public function show(string $id)
-    {
-        //
-    }
-
     public function edit(Program $program)
     {
+
         return view('programs.edit', compact('program'));
     }
 

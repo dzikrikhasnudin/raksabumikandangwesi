@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\GalleryVideo;
+use Illuminate\Support\Facades\Gate;
 
 class CreateVideo extends Component
 {
@@ -18,6 +19,9 @@ class CreateVideo extends Component
 
     public function store()
     {
+        if (!Gate::allows('gallery_create')) {
+            abort(404);
+        }
         $this->validate([
             'title' => 'required|min:5|unique:gallery_videos,title',
             'video' => 'required|min:11'

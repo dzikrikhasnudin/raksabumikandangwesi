@@ -10,6 +10,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:post_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:post_update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:post_delete', ['only' => 'destroy']);
+    }
+
     public function create()
     {
         return view('posts.create');

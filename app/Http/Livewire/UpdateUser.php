@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Gate;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UpdateUser extends Component
@@ -32,6 +33,10 @@ class UpdateUser extends Component
 
     public function updateRole()
     {
+        if (!Gate::allows('user_update')) {
+            abort(404);
+        }
+
         $user = User::find($this->userId);
 
         if ($user->getRoleNames()->first() !== 'SuperAdmin') {

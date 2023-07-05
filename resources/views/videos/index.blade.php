@@ -61,7 +61,7 @@
                     </thead>
                     <tbody>
                         @forelse ($videos as $index => $video)
-                        <tr class=" bg-white border-b hover:bg-gray-50 ">
+                        <tr class=" bg-white border-b hover:bg-gray-50 cursor-pointer">
                             <td class="px-3 py-2 text-center" width="50">
                                 {{ 1 + $index++ }}
                             </td>

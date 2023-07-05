@@ -32,6 +32,7 @@
                     <span class="ml-3">Dashboard</span>
                 </a>
             </li>
+            @can('post_show')
             <li>
                 <a href="{{ route('post.index') }}"
                     class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg hover:bg-gray-100  group">
@@ -42,6 +43,7 @@
                     <span class="ml-3">Postingan</span>
                 </a>
             </li>
+            @endcan
             @can('page_show')
             <li>
                 <a href="{{ route('page.index') }}"

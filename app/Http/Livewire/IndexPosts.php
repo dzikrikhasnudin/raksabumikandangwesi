@@ -3,9 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Request;
 
 class IndexPosts extends Component
 {
@@ -27,6 +28,10 @@ class IndexPosts extends Component
 
     public function render()
     {
+        if (!Gate::allows('post_show')) {
+            abort(404);
+        }
+
         if (request()->has('kategori')) {
             $posts = Post::where('category', '=', request('kategori'))->latest();
         } else {
