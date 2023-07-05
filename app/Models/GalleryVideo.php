@@ -25,4 +25,11 @@ class GalleryVideo extends Model
     {
         return 'slug';
     }
+
+    public function scopeSearch($query, $keyword)
+    {
+        $query->when($keyword ?? false, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%');
+        });
+    }
 }

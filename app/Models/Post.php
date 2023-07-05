@@ -28,10 +28,10 @@ class Post extends Model
 
     public function scopeSearch($query, $keyword)
     {
-        $query->when($keyword ?? false, function ($query, $cari) {
-            return $query->where('title', 'like', '%' . $cari . '%')
-                ->orWhere('content', 'like', '%' . $cari . '%')
-                ->orWhere('category', 'like', '%' . $cari . '%');
+        $query->when($keyword ?? false, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('content', 'like', '%' . $search . '%')
+                ->orWhere('category', 'like', '%' . $search . '%');
         });
     }
 

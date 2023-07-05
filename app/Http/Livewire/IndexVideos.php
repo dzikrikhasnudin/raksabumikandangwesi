@@ -39,7 +39,7 @@ class IndexVideos extends Component
         if ($this->search === null) {
             $videos = GalleryVideo::latest()->paginate($this->paginate);
         } else {
-            $videos = GalleryVideo::where('title', 'like', '%' . $this->search . '%')->latest()
+            $videos = GalleryVideo::search($this->search)->latest()
                 ->paginate($this->paginate);
         }
 

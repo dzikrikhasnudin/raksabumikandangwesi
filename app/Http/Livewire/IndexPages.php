@@ -9,18 +9,26 @@ use Livewire\WithPagination;
 class IndexPages extends Component
 {
     use WithPagination;
-    public $query = '';
+    public $search;
+    public $paginate = 5;
 
-    public function updatingQuery()
+    protected $queryString = ['search'];
+
+    public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->search = request()->query('search', $this->search);
     }
 
     public function render()
     {
 
         return view('pages.index', [
-            'pages' => Page::latest()->search($this->query)->paginate(5)
+            'pages' => Page::latest()->search($this->search)->paginate($this->paginate)
         ]);
     }
 }

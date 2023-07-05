@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'dzikri.khasnudin2@gmail.com',
             'password' => Hash::make('123456789'),
         ]);
+
+        $this->call([
+            PermissionTableSeeder::class
+        ]);
     }
 }

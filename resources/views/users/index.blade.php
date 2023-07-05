@@ -1,42 +1,19 @@
 <div class="md:ml-64">
-    <x-slot name="title">Video</x-slot>
+    <x-slot name="title">Semua Pengguna</x-slot>
     <x-slot name="sidebar">
         @include('layouts.sidebar')
     </x-slot>
 
     <div class="mt-16">
-        <div class="p-4 bg-white border-b sm:rounded-lg border-gray-100 mb-4">
-            @if (session()->has('message'))
-            <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-                role="alert">
-                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>
-                    <span class="font-medium">Berhasil!</span> {{ session('message') }}
+        <div class="p-4 bg-white border-b sm:rounded-lg border-gray-100">
+            <div class="flex justify-between mb-4 items-center">
+                <h2 class="text-xl font-semibold">Pengguna</h2>
+                <div class="flex gap-2">
+                    <button data-modal-target="tambahUser" data-modal-toggle="tambahUser"
+                        class="bg-green-500 hover:bg-green-600 active:bg-green-900 focus:bg-green-700 text-white h-8 w-8 text-center rounded">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </button>
                 </div>
-            </div>
-            @endif
-
-            <div class="flex justify-between items-center">
-                <h2 class="text-xl font-semibold">Video</h2>
-            </div>
-            <hr class="divide-x-2 my-4">
-
-            @if ($statusUpdate)
-            <livewire:update-video :videos="$videos"></livewire:update-video>
-            @else
-            <livewire:create-video></livewire:create-video>
-            @endif
-            <div class="flex gap-2 mb-4">
-                {{-- Pagination Settings --}}
-                <x-pagination-settings></x-pagination-settings>
-                {{-- Search Box --}}
-                <x-search-box placeholder="Cari Video..."></x-search-box>
             </div>
 
             <hr class="my-4">
@@ -49,10 +26,13 @@
                                 No.
                             </th>
                             <th scope="col" class="pl-0 pr-3 lg:px-6 py-3">
-                                Nama Album
+                                Nama Lengkap
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Tautan Video
+                                Email
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Role
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Aksi</span>
@@ -60,21 +40,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($videos as $index => $video)
-                        <tr class=" bg-white border-b hover:bg-gray-50 ">
+                        @forelse ($users as $index => $user)
+                        <tr class=" bg-white border-b hover:bg-gray-50 cursor-pointer">
                             <td class="px-3 py-2 text-center" width="50">
                                 {{ 1 + $index++ }}
                             </td>
                             <th scope="row" class="pl-0 pr-3 lg:px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
-                                {{ $video->title }}
+                                {{ $user->name }}
                             </th>
                             <td class="px-6 py-2">
-                                {{ $video->video }}
+                                {{ $user->email }}
+                            </td>
+                            <td class="px-6 py-2">
+                                @switch($user->getRolenames()->first())
+                                @case('Contributor') Kontributor
+                                @break
+                                @case('Admin') Administrator
+                                @break
+                                @default SuperAdmin
+                                @endswitch
                             </td>
                             <td class="px-6 py-2 text-right">
                                 <div class="flex m-auto  text-stone-600 ">
                                     {{-- Lihat --}}
-                                    <a href="#"
+                                    {{-- <a href="#"
                                         class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                                         <span class="mx-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -85,10 +74,11 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </span>
-                                    </a>
+                                    </a> --}}
 
                                     {{-- Edit --}}
-                                    <button wire:click="getVideo({{ $video->id }})"
+                                    <button data-modal-target="editUser" data-modal-toggle="editUser"
+                                        wire:click="editUser({{ $user->id }})"
                                         class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                                         <span class="mx-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -103,9 +93,9 @@
                                     </button>
                                     {{-- Hapus --}}
                                     @php
-                                    $videoId = $video->id;
+                                    $userId = $user->id;
                                     @endphp
-                                    <button wire:click="$emit('triggerDelete',{{ $videoId }})"
+                                    <button wire:click="$emit('triggerDelete',{{ $userId }})"
                                         class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                                         <span class="mx-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -131,20 +121,27 @@
                 </table>
             </div>
             <div class="mt-3 px-2">
-                {{ $videos->links() }}
+                {{ $users->links() }}
             </div>
+
         </div>
     </div>
 </div>
 
+@push('modals')
+@include('users.create')
+<livewire:update-user :roles="$roles"></livewire:update-user>
+@endpush
+
+@push('script')
 @push('script')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
-        @this.on('triggerDelete', videoId => {
+        @this.on('triggerDelete', userId => {
             Swal.fire({
                 title: 'Yakin hapus data?',
-                text: 'Data video akan dihapus permanen!',
+                text: 'Data pengguna akan dihapus permanen!',
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: '#E12425',
@@ -152,20 +149,16 @@
                 confirmButtonText: 'Hapus saja!',
                 cancelButtonText: 'Batalkan'
             }).then((result) => {
-         //if user clicks on delete
+            //if user clicks on delete
                 if (result.value) {
              // calling destroy method to delete
-                    @this.call('destroy', videoId)
+                    @this.call('destroy', userId)
              // success response
-                    Swal.fire({title: 'Data video berhasil dihapus!', icon: 'success'});
-                } else {
-                    Swal.fire({
-                        title: 'Hapus data dibatalkan!',
-                        icon: 'success'
-                    });
+                    Swal.fire({title: 'Data pengguna berhasil dihapus!', icon: 'success'});
                 }
             });
         });
     })
 </script>
+@endpush
 @endpush

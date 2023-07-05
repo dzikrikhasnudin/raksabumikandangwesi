@@ -42,6 +42,7 @@
                     <span class="ml-3">Postingan</span>
                 </a>
             </li>
+            @can('page_show')
             <li>
                 <a href="{{ route('page.index') }}"
                     class="flex items-center text-base p-2 font-medium text-gray-900 rounded-lg hover:bg-gray-100 group">
@@ -52,6 +53,8 @@
                     <span class="ml-3">Halaman</span>
                 </a>
             </li>
+            @endcan
+            @can('program_show')
             <li>
                 <a href="{{ route('program.index') }}"
                     class="flex items-center text-base p-2 font-medium text-gray-900 rounded-lg hover:bg-gray-100 group">
@@ -62,13 +65,13 @@
                     <span class="ml-3">Program</span>
                 </a>
             </li>
+            @endcan
 
             <li>
                 <button type="button"
-                    class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 "
                     aria-controls="dropdown-sales" data-collapse-toggle="dropdown-sales">
-                    <span
-                        class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
+                    <span class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900">
                         <i class="fa-solid fa-photo-film"></i>
                     </span>
                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Galeri</span>
@@ -82,7 +85,7 @@
                 <ul id="dropdown-sales" class="hidden py-2 space-y-2">
                     <li>
                         <a href="{{ route('album.index') }}"
-                            class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Foto</a>
+                            class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 ">Foto</a>
                     </li>
                     <li>
                         <a href="{{ route('video.index') }}"
@@ -113,8 +116,9 @@
 
         </ul>
         <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
+            @can('user_show')
             <li>
-                <a href="#"
+                <a href="{{ route('user.index') }}"
                     class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                     <span
                         class="flex-shrink-0 text-center w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -123,6 +127,7 @@
                     <span class="ml-3">Kelola Pengguna</span>
                 </a>
             </li>
+            @endcan
             <li>
                 <a href="#"
                     class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">

@@ -4,10 +4,12 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\IndexAlbum;
 use App\Http\Livewire\IndexPages;
 use App\Http\Livewire\IndexPosts;
 use App\Http\Livewire\IndexPrograms;
+use App\Http\Livewire\IndexUsers;
 use App\Http\Livewire\IndexVideos;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +36,6 @@ Route::middleware([
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
-
 
     // Route Postingan
     Route::prefix('postingan')->name('post.')->group(function () {
@@ -87,6 +88,10 @@ Route::middleware([
 
     Route::get('videos', IndexVideos::class)->name('video.index');
 
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::get('/', IndexUsers::class)->name('index');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+    });
 
     Route::get('{category}/{slug}', [PostController::class, 'show'])->name('detail.post');
 });

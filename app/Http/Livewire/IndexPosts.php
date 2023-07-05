@@ -10,11 +10,19 @@ use Livewire\WithPagination;
 class IndexPosts extends Component
 {
     use WithPagination;
-    public $query = '';
+    public $search;
+    public $paginate = 5;
 
-    public function updatingQuery()
+    protected $queryString = ['search'];
+
+    public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->search = request()->query('search', $this->search);
     }
 
     public function render()
@@ -22,15 +30,11 @@ class IndexPosts extends Component
         if (request()->has('kategori')) {
             $posts = Post::where('category', '=', request('kategori'))->latest();
         } else {
-            $posts = Post::latest()->search($this->query);
+            $posts = Post::latest()->search($this->search);
         }
 
-        $title = 'Delete Posts!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-
         return view('posts.index', [
-            'posts' => $posts->paginate(5)
+            'posts' => $posts->paginate($this->paginate)
         ]);
     }
 }

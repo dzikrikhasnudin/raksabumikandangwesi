@@ -5,15 +5,18 @@
     </x-slot>
 
     <div class="mt-16">
-        <div class="flex justify-between items-center bg-white px-4 py-6 rounded-lg border border-gray-100  h-12 mb-4">
-            <h2 class="text-xl font-semibold">Album</h2>
-            <x-button data-modal-target="tambahAlbum" data-modal-toggle="tambahAlbum"
-                class="bg-primary-500 hover:bg-primary-600 active:bg-primary-900 focus:bg-primary-700 text-white"> <i
-                    class="fa-solid fa-plus mr-2"></i>
-                <span>Tambah</span>
-            </x-button>
-        </div>
         <div class="p-4 bg-white border-b sm:rounded-lg border-gray-100 mb-4">
+            <div class="flex justify-between items-center ">
+                <h2 class="text-xl font-semibold">Album</h2>
+                <x-button data-modal-target="tambahAlbum" data-modal-toggle="tambahAlbum"
+                    class="bg-primary-500 hover:bg-primary-600 active:bg-primary-900 focus:bg-primary-700 text-white">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    <span>Tambah</span>
+                </x-button>
+            </div>
+
+            <hr class="my-4">
+
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -35,16 +38,16 @@
                     <tbody>
                         @forelse ($albums as $index => $album)
                         <tr class=" bg-white border-b hover:bg-gray-50 ">
-                            <td class="px-3 py-4 text-center" width="50">
+                            <td class="px-3 py-2 text-center" width="50">
                                 {{ 1 + $index++ }}
                             </td>
-                            <th scope="row" class="pl-0 pr-3 lg:px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            <th scope="row" class="pl-0 pr-3 lg:px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
                                 {{ $album->name }}
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-2">
                                 {{ $album->year }}
                             </td>
-                            <td class="px-6 py-4 text-right">
+                            <td class="px-6 py-2 text-right">
                                 <div class="flex m-auto  text-stone-600 ">
                                     {{-- Lihat --}}
                                     <a href="{{ route('album.show', $album) }}"
