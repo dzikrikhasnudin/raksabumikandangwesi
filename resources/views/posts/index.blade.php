@@ -55,8 +55,7 @@
 
                 <div class="hidden md:flex m-auto  text-stone-600 ">
                     {{-- Lihat --}}
-                    <a href="{{ route('detail.post', ['slug' => $post->slug, 'category' => $post->category]) }}"
-                        target="_blank"
+                    <a href="#" target="_blank"
                         class="py-2 flex hover:bg-stone-200 hover:rounded-full text-stone-600 items-center active:bg-amber-300">
                         <span class="mx-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -104,8 +103,7 @@
                 {{-- Responsive --}}
                 <nav x-show="open" x-transition.duration.300ms @click.outside="open = false"
                     class="action border border-stone-200 absolute bg-white row-start-2 col-start-4 cols-span-5 w-full  rounded drop-shadow-lg shadow-stone-800 py-2 -mt-8 z-50">
-                    <a href="{{ route('detail.post', ['slug' => $post->slug, 'category' => $post->category]) }}"
-                        target="_blank" class="py-2 flex text-stone-600 items-center active:bg-amber-200">
+                    <a href="#" target="_blank" class="py-2 flex text-stone-600 items-center active:bg-amber-200">
                         <span class="mx-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">

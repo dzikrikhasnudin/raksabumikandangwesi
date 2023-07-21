@@ -21,6 +21,8 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
 
+    @stack('style')
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -30,6 +32,10 @@
     <div class="font-sans text-gray-900 antialiased">
         {{ $slot }}
     </div>
+
+    @include('partials.footer')
+
+    @stack('script')
 </body>
 
 </html>

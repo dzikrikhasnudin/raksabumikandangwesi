@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProgramController;
@@ -21,12 +23,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
-
 require __DIR__ . '/admin.php';
+
+Route::controller(MenuController::class)->group(function () {
+    Route::get('/', 'home')->name('home');
+
+    Route::get('profil/{slug}', 'profil')->name('profil');
+    Route::get('program', 'program')->name('program');
+    Route::get('artikel', 'postingan')->name('artikel');
+    Route::get('ceramah', 'postingan')->name('ceramah');
+    Route::get('tokoh', 'postingan')->name('tokoh');
+    Route::get('berita', 'postingan')->name('berita');
+    Route::get('galeri', 'galeri')->name('galeri');
+    Route::get('{category}/{slug}', 'detail')->name('detail');
+});

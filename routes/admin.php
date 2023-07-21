@@ -62,7 +62,7 @@ Route::middleware([
     });
 
     // Route Program
-    Route::prefix('program')->name('program.')->group(function () {
+    Route::prefix('programs')->name('program.')->group(function () {
         Route::get('/', IndexPrograms::class)->name('index');
         Route::controller(ProgramController::class)->group(function () {
             Route::get('/tambah', 'create')->name('create');
@@ -92,6 +92,4 @@ Route::middleware([
         Route::get('/', IndexUsers::class)->name('index');
         Route::post('/', [UserController::class, 'store'])->name('store');
     });
-
-    Route::get('{category}/{slug}', [PostController::class, 'show'])->name('detail.post');
 });

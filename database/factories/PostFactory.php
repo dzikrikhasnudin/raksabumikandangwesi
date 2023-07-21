@@ -20,8 +20,8 @@ class PostFactory extends Factory
         return [
             'title' => Str::ucfirst(fake()->sentence()),
             'slug' => Str::slug(fake()->sentence()),
-            'description' => fake()->paragraph(),
-            'thumbnail' => 'https://placehold.co/600x400',
+            'description' => fake()->sentence(),
+            'thumbnail' => '/storage/photos/upload/no-image.png',
             'content' => fake()->text(300),
             'category' => fake()->randomElement(['artikel', 'tokoh', 'berita', 'ceramah']),
             'status' => fake()->randomElement(['published', 'draft']),
