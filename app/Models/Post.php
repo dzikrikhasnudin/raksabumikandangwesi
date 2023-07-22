@@ -31,7 +31,8 @@ class Post extends Model
         $query->when($keyword ?? false, function ($query, $search) {
             return $query->where('title', 'like', '%' . $search . '%')
                 ->orWhere('content', 'like', '%' . $search . '%')
-                ->orWhere('category', 'like', '%' . $search . '%');
+                ->orWhere('category', 'like', '%' . $search . '%')
+                ->orWhere('status', 'like', '%' . $search . '%');
         });
     }
 

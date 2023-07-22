@@ -13,6 +13,7 @@ class IndexPosts extends Component
     use WithPagination;
     public $search;
     public $paginate = 5;
+    public $status = 'all';
 
     protected $queryString = ['search'];
 
@@ -38,8 +39,21 @@ class IndexPosts extends Component
             $posts = Post::latest()->search($this->search);
         }
 
+        switch ($this->status) {
+            case 'draft':
+                $posts = $posts->draft()->paginate($this->paginate);
+                break;
+            case 'published':
+                $posts = $posts->published()->paginate($this->paginate);
+                break;
+            case 'all':
+                $posts = $posts->paginate($this->paginate);
+                break;
+        }
+
+
         return view('posts.index', [
-            'posts' => $posts->paginate($this->paginate)
+            'posts' => $posts
         ]);
     }
 }

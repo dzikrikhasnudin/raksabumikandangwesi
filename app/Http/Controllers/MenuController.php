@@ -17,7 +17,7 @@ class MenuController extends Controller
 
     public function profil($slug)
     {
-        $data = Page::where('slug', $slug)->firstOrFail();
+        $data = Page::published()->where('slug', $slug)->firstOrFail();
 
         return view('frontpage.profil', compact('data'));
     }

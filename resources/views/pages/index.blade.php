@@ -18,6 +18,8 @@
             <div class="flex gap-2 mb-4">
                 {{-- Pagination Settings --}}
                 <x-pagination-settings></x-pagination-settings>
+
+                <x-status></x-status>
                 {{-- Search Box --}}
                 <x-search-box placeholder="Cari Halaman..."></x-search-box>
             </div>
