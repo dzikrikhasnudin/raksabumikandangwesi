@@ -6,13 +6,11 @@
         @endif
         <li>
             <a href="{{ $url }}"
-                class="text-amber-400 hover:text-orange-500 hover:underline focus:text-orange-500 focus:underline">
+                class="text-primary-500 hover:text-primary-700 hover:underline focus:text-primary-700 focus:underline">
                 {{ $nama_kategori }}
             </a>
         </li>
         @endforeach
-        {{-- <li>
-            <a href="#" class="hover:underline "> {{ $nama_kategori }} </a>
-        </li> --}}
+
     </ol>
 </nav>

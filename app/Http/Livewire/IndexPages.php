@@ -12,6 +12,7 @@ class IndexPages extends Component
     use WithPagination;
     public $search;
     public $paginate = 5;
+    public $status = 'all';
 
     protected $queryString = ['search'];
 
@@ -31,8 +32,20 @@ class IndexPages extends Component
             abort(404);
         }
 
+        switch ($this->status) {
+            case 'draft':
+                $pages = Page::draft()->latest()->search($this->search)->paginate($this->paginate);
+                break;
+            case 'published':
+                $pages = Page::published()->latest()->search($this->search)->paginate($this->paginate);
+                break;
+            case 'all':
+                $pages = Page::latest()->search($this->search)->paginate($this->paginate);
+                break;
+        }
+
         return view('pages.index', [
-            'pages' => Page::latest()->search($this->search)->paginate($this->paginate)
+            'pages' => $pages
         ]);
     }
 }

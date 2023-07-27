@@ -17,7 +17,9 @@ class MenuController extends Controller
 
     public function profil($slug)
     {
-        $data = Page::published()->where('slug', $slug)->firstOrFail();
+        $data = Page::published()->where('slug', $slug)->first();
+
+        // dd($data);
 
         return view('frontpage.profil', compact('data'));
     }
@@ -34,7 +36,7 @@ class MenuController extends Controller
     {
         $path = request()->path();
 
-        $posts = Post::published()->where('category', $path)->latest()->get();
+        $posts = Post::published()->where('category', $path)->latest()->paginate(5);
         $latest = Post::published()->latest();
 
         return view('frontpage.postingan', [
@@ -55,11 +57,17 @@ class MenuController extends Controller
     {
 
         if ($category == 'program') {
-            $data = Program::where('slug', $slug)->first();
+            $data = Program::where('slug', $slug)->firstOrFail();
+            $related = Program::where('id', '!=', $data->id)->published()->inRandomOrder()->limit(4)->get();
         } else {
-            $data = Post::where('slug', $slug)->first();
+            $data = Post::where('category', $category)->where('slug', $slug)->firstOrFail();
+            $related = Post::where('id', '!=', $data->id)->published()->inRandomOrder()->limit(4)->get();
         }
 
-        return view('frontpage.detail', compact('data'));
+        return view('frontpage.detail', [
+            'data' => $data,
+            'title' => $category,
+            'relatedArticles' => $related
+        ]);
     }
 }

@@ -58,6 +58,7 @@ class ProgramController extends Controller
         ]);
 
         $data['slug'] = Str::slug($request->title);
+        $data['thumbnail'] = parse_url($request->thumbnail)['path'];
         $data['status'] = $request->status;
 
         $program->update($data);
