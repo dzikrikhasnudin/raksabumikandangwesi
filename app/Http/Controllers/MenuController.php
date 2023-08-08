@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\GalleryImage;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Program;
@@ -12,7 +13,11 @@ class MenuController extends Controller
 {
     public function home()
     {
-        return view('frontpage.home');
+        $latest = Post::latest()->take(3)->get();
+
+        return view('frontpage.home', [
+            'latest' => $latest
+        ]);
     }
 
     public function profil($slug)
@@ -48,9 +53,8 @@ class MenuController extends Controller
 
     public function galeri()
     {
-        $posts = Album::latest()->get();
-
-        return view('frontpage.galeri', compact('posts'));
+        $images = GalleryImage::latest()->paginate(16);
+        return view('frontpage.galeri', compact('images'));
     }
 
     public function detail($category, $slug)

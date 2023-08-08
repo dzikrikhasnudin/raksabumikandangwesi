@@ -6,15 +6,27 @@
         </div>
     </header>
     <div class="max-w-6xl mx-auto ">
-        <div class="grid p-6 ">
-            @foreach ($posts as $data)
-            <ul>
-                <li>
-                    <a href="/galeri/{{ $data->slug }}">{{
-                        $data->title }}</a>
-                </li>
-            </ul>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6">
+            @foreach ($images as $data)
+            <a href="{{ $data->image }}" data-lightbox="galeri" data-title="{{ $data->album->name }}">
+                <img class="aspect-square w-full object-cover rounded-lg" src="{{ $data->image }}" alt="">
+            </a>
             @endforeach
         </div>
+
+        <div class="pagination mt-4">
+            {{ $images->links() }}
+        </div>
     </div>
+    </div>
+
+    @push('style')
+    <link rel="stylesheet" href="{{ asset('vendor/lightbox2/dist/css/lightbox.min.css') }}">
+    @endpush
+
+    @push('script')
+    <script src="{{ asset('vendor/lightbox2/dist/js/lightbox-plus-jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/lightbox2/dist/js/lightbox.min.js') }}"></script>
+    @endpush
 </x-guest-layout>

@@ -26,8 +26,7 @@
                     <div class="hover:relative group transition-all duration-300 ease-in">
                         <a href="{{ $data->image }}" data-lightbox="{{ $album->slug }}" data-title="{{ $album->name }}"
                             class="">
-                            <img class="h-full object-cover max-w-full rounded-lg" src="{{ $data->image }}" alt="">
-
+                            <img class="aspect-square w-full object-cover rounded-lg" src="{{ $data->image }}" alt="">
                         </a>
                         <form action="{{ route('album.destroy-image', $data->id) }}" method="POST" role="alert"
                             alert-text="Yakin Hapus Gambar?">

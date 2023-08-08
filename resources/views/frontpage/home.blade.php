@@ -153,21 +153,24 @@
                             test assumptions and connect with the needs of your audience early and often.</p>
                     </div>
                     <div class="grid gap-8 lg:grid-cols-3">
+                        @foreach ($latest as $data)
                         <article
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="#">
-                                <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg"
+                            <a href="{{ route('detail', ['category' => $data->category, 'slug' => $data->slug]) }}">
+                                <img class="rounded-t-lg aspect-video object-cover w-full" src="{{ $data->thumbnail }}"
                                     alt="" />
                             </a>
                             <div class="p-5">
-                                <a href="#">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        Noteworthy technology acquisitions 2021</h5>
+                                <a href="{{ route('detail', ['category' => $data->category, 'slug' => $data->slug]) }}">
+                                    <h5
+                                        class="mb-2 line-clamp-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                        {{
+                                        $data->title }}</h5>
                                 </a>
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                    enterprise technology acquisitions of 2021 so far, in reverse chronological order.
+                                <p class="line-clamp-3 mb-3 font-normal text-gray-700 dark:text-gray-400">{{
+                                    $data->description }}
                                 </p>
-                                <a href="#"
+                                <a href="{{ route('detail', ['category' => $data->category, 'slug' => $data->slug]) }}"
                                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                     Read more
                                     <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -178,56 +181,7 @@
                                 </a>
                             </div>
                         </article>
-                        <article
-                            class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="#">
-                                <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-2.jpg"
-                                    alt="" />
-                            </a>
-                            <div class="p-5">
-                                <a href="#">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        Noteworthy technology acquisitions 2021</h5>
-                                </a>
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                    enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                                </p>
-                                <a href="#"
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                    Read more
-                                    <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 14 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </article>
-                        <article
-                            class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="#">
-                                <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-3.jpg"
-                                    alt="" />
-                            </a>
-                            <div class="p-5">
-                                <a href="#">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        Noteworthy technology acquisitions 2021</h5>
-                                </a>
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                    enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                                </p>
-                                <a href="#"
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                    Read more
-                                    <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 14 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </article>
+                        @endforeach
 
                     </div>
                 </div>
@@ -238,11 +192,5 @@
     </div>
 
 
-
-    {{-- <div class="bg-primary-600 h-screen mt-14 pt-4">
-        <div class="max-w-6xl  mx-auto px-4">
-            <h2>Ini Home</h2>
-        </div>
-    </div> --}}
 
 </x-guest-layout>
