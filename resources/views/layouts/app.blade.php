@@ -44,6 +44,8 @@
         </main>
     </div>
 
+    @include('partials.dashboard-footer')
+
     @stack('modals')
 
     @livewireScripts

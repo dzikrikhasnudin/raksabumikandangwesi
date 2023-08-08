@@ -7,16 +7,29 @@ use App\Models\GalleryImage;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Program;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     public function home()
     {
-        $latest = Post::latest()->take(3)->get();
+        $latest = Post::latest()->published()->take(3)->get();
 
         return view('frontpage.home', [
             'latest' => $latest
+        ]);
+    }
+
+    public function dashboard()
+    {
+
+        return view('dashboard', [
+            'totalProgram' => Program::count(),
+            'totalPostingan' => Post::count(),
+            'totalAlbum' => Album::count(),
+            'totalPengguna' => User::count(),
+            'latest' => Post::published()->latest()->take(4)->get()
         ]);
     }
 
