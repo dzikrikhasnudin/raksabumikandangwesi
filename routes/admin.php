@@ -13,6 +13,9 @@ use App\Http\Livewire\IndexUsers;
 use App\Http\Livewire\IndexVideos;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use App\Http\Livewire\IndexContacts;
+use App\Http\Controllers\ContactController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +89,9 @@ Route::middleware([
     });
 
     Route::get('videos', IndexVideos::class)->name('video.index');
+    Route::get('contacts', IndexContacts::class)->name('contact.index');
+    Route::get('contacts/{id}', [ContactController::class, 'show'])->name('contact.detail');
+    Route::delete('contacts/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
 
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', IndexUsers::class)->name('index');

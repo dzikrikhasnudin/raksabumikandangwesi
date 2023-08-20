@@ -1,16 +1,10 @@
 <?php
 
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\AlbumController;
+
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProgramController;
-use App\Http\Livewire\IndexAlbum;
-use App\Http\Livewire\IndexPages;
-use App\Http\Livewire\IndexPosts;
-use App\Http\Livewire\IndexPrograms;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 require __DIR__ . '/admin.php';
+
+Route::get('kontak', [ContactController::class, 'create'])->name('contact.create');
+Route::post('kontak', [ContactController::class, 'store'])->name('contact.store');
+Route::get('kontak/sukses', [ContactController::class, 'success'])->name('contact.success');
 
 Route::controller(MenuController::class)->group(function () {
     Route::get('/', 'home')->name('home');

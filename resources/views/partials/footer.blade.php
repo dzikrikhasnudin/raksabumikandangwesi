@@ -11,13 +11,13 @@
             elements built for better web.</p>
         <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
             <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">Tentang Kami</a>
+                <a href="/profil/sejarah-berdiri" class="mr-4 hover:underline md:mr-6 ">Tentang Kami</a>
             </li>
             <li>
                 <a href="#" class="mr-4 hover:underline md:mr-6">Kebijakan dan Privasi</a>
             </li>
             <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">Kontak</a>
+                <a href="{{ route('contact.create') }}" class="mr-4 hover:underline md:mr-6 ">Kontak</a>
             </li>
             <li>
                 <a href="#" class="mr-4 hover:underline md:mr-6">Sitemap</a>
@@ -29,7 +29,7 @@
                 <a href="#" class="mr-4 hover:underline md:mr-6">FAQs</a>
             </li>
         </ul>
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">{{ now()->year }} <a href="#"
-                class="hover:underline">Raksabumi™</a>. All Rights Reserved.</span>
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">{{ now()->year }} <a
+                href="{{ route('home') }}" class="hover:underline">Raksabumi™</a>. All Rights Reserved.</span>
     </div>
 </footer>

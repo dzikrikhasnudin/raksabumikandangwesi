@@ -184,7 +184,10 @@ return [
         'description' => 'Deskripsi',
         'content' => 'Konten',
         'category' => 'Kategori',
-        'thumbnail' => 'Thumbnail'
+        'thumbnail' => 'Thumbnail',
+        'message' => 'Pesan',
+        'subject' => 'Subjek',
+        'email' => 'Email'
 
     ],
 

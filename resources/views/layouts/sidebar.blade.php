@@ -20,6 +20,7 @@
             </div>
         </form>
         <ul class="space-y-2">
+
             <li>
                 <a href="{{ route('dashboard') }}"
                     class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -96,7 +97,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('contact.index') }}"
                     class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg aria-hidden="true"
                         class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -111,7 +112,7 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Kotak Masuk</span>
                     <span
                         class="inline-flex justify-center items-center w-5 h-5 text-xs font-semibold rounded-full text-primary-800 bg-primary-100 dark:bg-primary-200 dark:text-primary-800">
-                        0
+                        {{ total_message() }}
                     </span>
                 </a>
             </li>
@@ -154,6 +155,19 @@
                     <span class="ml-3">FAQ</span>
                 </a>
             </li>
+
+            <li class="border-y">
+                <a href="{{ route('home') }}" target="_blank"
+                    class="flex items-center p-2 text-base font-medium text-primary-500 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <span
+                        class="flex-shrink-0 text-center text-lg w-6 h-6 text-primary-500 transition duration-75 group-hover:text-primary-600">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                    <span class="ml-3">Lihat Situs</span>
+                </a>
+            </li>
         </ul>
+
+
     </div>
 </aside>
