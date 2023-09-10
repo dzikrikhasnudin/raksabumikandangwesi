@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="flex flex-row items-center bg-white shadow-lg shadow-gray-200 rounded-2xl p-4 ">
-                    <a href="#"
+                    <a href="{{ route('user.index') }}"
                         class="inline-flex flex-shrink-0 justify-center items-center w-20 h-20 text-white bg-gradient-to-br bg-amber-500 hover:bg-amber-600 transition duration-300 rounded-lg shadow-md shadow-gray-300">
                         <i class="fa-solid fa-users text-4xl text-white my-auto"></i>
                     </a>
