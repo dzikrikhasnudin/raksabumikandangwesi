@@ -7,8 +7,8 @@
             <x-application-logo></x-application-logo>
             Raksabumi
         </a>
-        <p class="my-6 text-gray-500 dark:text-gray-400">Open-source library of over 400+ web components and interactive
-            elements built for better web.</p>
+        <p class="my-6 text-gray-500 dark:text-gray-400">Yayasan Rabuka bergerak dalam bidang sosial, pendidikan, dan
+            keagamaan.</p>
         <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
             <li>
                 <a href="/profil/sejarah-berdiri" class="mr-4 hover:underline md:mr-6 ">Tentang Kami</a>
